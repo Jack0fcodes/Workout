@@ -1,0 +1,1 @@
+window.Routines={sample:[{name:"Dumbbell Shoulder Press",sets:3,reps:"10–12",rest:90},{name:"Dumbbell Lateral Raise",sets:3,reps:"10–12",rest:60},{name:"Dumbbell Bicep Curl",sets:3,reps:"10–12",rest:60},{name:"Hammer Curl",sets:3,reps:"10–12",rest:60},{name:"Overhead Triceps Extension",sets:3,reps:"10–12",rest:60}]};
