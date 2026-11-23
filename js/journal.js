@@ -1,0 +1,1 @@
+window.Journal={add(entry){Store.update(d=>d.bodyEntries.unshift({...entry,id:Date.now()}))},all(){return Store.get().bodyEntries}};
