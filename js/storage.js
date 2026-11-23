@@ -1,0 +1,1 @@
+(()=>{const KEY="setflow-data-v1";const blank={history:[],bodyEntries:[],theme:"dark"};window.Store={get(){try{return {...blank,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch{return {...blank}}},save(data){localStorage.setItem(KEY,JSON.stringify(data))},update(fn){const d=this.get();fn(d);this.save(d);return d}}})();
