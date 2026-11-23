@@ -1,6 +1,6 @@
-# SetFlow
+# Workout
 
-A minimal, local-first workout tracker and fitness journal.
+A minimal, glass-inspired, local-first workout tracker and fitness journal.
 
 ## Features
 - Sample dumbbell upper-body routine
