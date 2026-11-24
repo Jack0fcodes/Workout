@@ -38,13 +38,15 @@ function renderCalendar(){
   const last=new Date(year,11,31);
   const names=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const weekCount=Math.ceil((Math.ceil((last-first)/86400000)+1)/7);
-  let weeks="",months="",lastMonth=-1,active=0;
+  let weeks="",months="",active=0;
+  // Anchor each label to the week containing the month's first day.
+  for(let m=0;m<12;m++){
+   const monthStart=new Date(year,m,1);
+   const col=Math.floor((monthStart-first)/86400000/7)+1;
+   months+='<span style="grid-column:'+col+'">'+names[m]+'</span>';
+  }
   for(let w=0;w<weekCount;w++){
    const sunday=new Date(first);sunday.setDate(first.getDate()+w*7);
-   if(sunday.getMonth()!==lastMonth){
-    months+='<span style="grid-column:'+(w+1)+'">'+names[sunday.getMonth()]+'</span>';
-    lastMonth=sunday.getMonth();
-   }
    let cells="";
    for(let d=0;d<7;d++){
     const date=new Date(sunday);date.setDate(sunday.getDate()+d);date.setHours(0,0,0,0);
