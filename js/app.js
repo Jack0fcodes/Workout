@@ -10,7 +10,7 @@ const workoutTemplate={name:"Shoulders & Arms",level:"Beginner",equipment:"Dumbb
 function dateLabel(){return new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric"}).format(new Date())}
 function stats(){const h=Store.get().history;$("workoutCount").textContent=h.length;$("trainingTime").textContent=Math.round(h.reduce((a,b)=>a+(b.duration||0),0)/60)+"m";$("streak").textContent=streak(h);$("recentWorkouts").innerHTML=h.length?h.slice(0,4).map(x=>'<div class="history-item"><strong>'+x.name+'</strong><div class="muted">'+new Date(x.date).toLocaleDateString()+' · '+Math.round(x.duration/60)+' min</div></div>').join(""):"No workouts yet"}
 
-let calendarMode="month",calendarCursor=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+let calendarMode="year",calendarCursor=new Date(new Date().getFullYear(),new Date().getMonth(),1);
 function dateKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function workoutCounts(){const map=new Map();Store.get().history.forEach(item=>{const d=new Date(item.date),k=dateKey(d);map.set(k,(map.get(k)||0)+1)});return map}
 function renderCalendar(){
