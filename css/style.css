@@ -253,3 +253,19 @@
 .month-day.is-today{outline:1px solid #e3e3e8;outline-offset:1px}
 .contribution-section [hidden]{display:none!important}
 @media(min-width:700px){.month-grid,.month-weekdays{gap:10px}.month-day{min-height:52px;border-radius:10px;font-size:14px}.month-day small{font-size:10px}}
+
+/* Monochrome progress palette — keep Workout's charcoal theme */
+.contribution-cell.level-1{background:#292b30;border-color:#393b42}
+.contribution-cell.level-2{background:#454850;border-color:#555963}
+.contribution-cell.level-3{background:#737780;border-color:#858a94}
+.contribution-cell.level-4{background:#c4c8d0;border-color:#d7dae0}
+.contribution-legend .level-1{background:#292b30}
+.contribution-legend .level-2{background:#454850}
+.contribution-legend .level-3{background:#737780}
+.contribution-legend .level-4{background:#c4c8d0}
+.month-day.level-1{background:#292b30;border-color:#393b42;color:#e2e3e7}
+.month-day.level-2{background:#454850;border-color:#555963;color:#fff}
+.month-day.level-3{background:#737780;border-color:#858a94;color:#fff}
+.month-day.level-4{background:#c4c8d0;border-color:#d7dae0;color:#111216}
+.completion-value{color:#d7dae0}
+.footer-track span{background:#aeb3bd}
