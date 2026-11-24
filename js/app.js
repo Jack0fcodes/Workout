@@ -10,32 +10,46 @@ const workoutTemplate={name:"Shoulders & Arms",level:"Beginner",equipment:"Dumbb
 function dateLabel(){return new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric"}).format(new Date())}
 function stats(){const h=Store.get().history;$("workoutCount").textContent=h.length;$("trainingTime").textContent=Math.round(h.reduce((a,b)=>a+(b.duration||0),0)/60)+"m";$("streak").textContent=streak(h);$("recentWorkouts").innerHTML=h.length?h.slice(0,4).map(x=>'<div class="history-item"><strong>'+x.name+'</strong><div class="muted">'+new Date(x.date).toLocaleDateString()+' · '+Math.round(x.duration/60)+' min</div></div>').join(""):"No workouts yet"}
 
+let calendarMode="month",calendarCursor=new Date(new Date().getFullYear(),new Date().getMonth(),1);
 function dateKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function workoutCounts(){const map=new Map();Store.get().history.forEach(item=>{const d=new Date(item.date),k=dateKey(d);map.set(k,(map.get(k)||0)+1)});return map}
 function renderCalendar(){
- const today=new Date();today.setHours(0,0,0,0);
- const first=new Date(today);first.setDate(first.getDate()-364);first.setDate(first.getDate()-first.getDay());
- const counts=new Map();
- Store.get().history.forEach(item=>{const d=new Date(item.date);const key=dateKey(d);counts.set(key,(counts.get(key)||0)+1)});
- const monthNames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
- let weeks="",months="",lastMonth=-1,workoutDays=0;
- for(let w=0;w<53;w++){
-  const monday=new Date(first);monday.setDate(first.getDate()+w*7);
-  if(monday.getMonth()!==lastMonth){months+='<span style="grid-column:'+(w+1)+'">'+monthNames[monday.getMonth()]+'</span>';lastMonth=monday.getMonth()}
-  let cells="";
-  for(let d=0;d<7;d++){
-   const date=new Date(monday);date.setDate(monday.getDate()+d);
-   const count=counts.get(dateKey(date))||0;
-   const future=date>today;
-   if(count&&!future)workoutDays++;
-   const level=future||!count?0:count===1?2:count===2?3:4;
-   const label=count?count+" workout"+(count===1?"":"s"):"No workout";
-   cells+='<span class="contribution-cell level-'+level+(date.getTime()===today.getTime()?" is-today":"")+'" title="'+dateKey(date)+": "+label+'" aria-label="'+dateKey(date)+": "+label+'"></span>';
+ const today=new Date();today.setHours(0,0,0,0);const counts=workoutCounts();
+ $("monthCalendar").hidden=calendarMode!=="month";$("yearCalendar").hidden=calendarMode!=="year";
+ $("monthViewButton").classList.toggle("active",calendarMode==="month");$("yearViewButton").classList.toggle("active",calendarMode==="year");
+ if(calendarMode==="month"){
+  const y=calendarCursor.getFullYear(),m=calendarCursor.getMonth(),first=new Date(y,m,1),days=new Date(y,m+1,0).getDate();
+  $("monthLabel").textContent=new Intl.DateTimeFormat(undefined,{month:"long",year:"numeric"}).format(first);
+  $("monthNext").disabled=y===today.getFullYear()&&m===today.getMonth();
+  let cells="";for(let i=0;i<first.getDay();i++)cells+='<span class="month-day blank"></span>';
+  let active=0;
+  for(let day=1;day<=days;day++){
+   const date=new Date(y,m,day);date.setHours(0,0,0,0);const count=counts.get(dateKey(date))||0,future=date>today,isToday=date.getTime()===today.getTime();
+   if(count&&!future)active++;
+   const level=count===0?0:count===1?2:count===2?3:4;
+   const cls="month-day level-"+(future?0:level)+(isToday?" is-today":"")+(count?" has-workout":"");
+   cells+='<div class="'+cls+'" title="'+dateKey(date)+": "+(count?count+" workout(s)":"No workout")+'"><span>'+day+'</span>'+(count?'<small>'+count+'×</small>':'')+'</div>';
   }
-  weeks+='<div class="contribution-week">'+cells+'</div>';
+  $("monthGrid").innerHTML=cells;
+  $("activitySummary").textContent=active+" workout days this month";
+ }else{
+  const first=new Date(today);first.setDate(first.getDate()-364);first.setDate(first.getDate()-first.getDay());
+  const names=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  let weeks="",months="",lastMonth=-1,active=0;
+  for(let w=0;w<53;w++){
+   const monday=new Date(first);monday.setDate(first.getDate()+w*7);
+   if(monday.getMonth()!==lastMonth){months+='<span style="grid-column:'+(w+1)+'">'+names[monday.getMonth()]+'</span>';lastMonth=monday.getMonth()}
+   let cells="";for(let d=0;d<7;d++){
+    const date=new Date(monday);date.setDate(monday.getDate()+d);const count=counts.get(dateKey(date))||0,future=date>today;
+    if(count&&!future)active++;
+    const level=future||!count?0:count===1?2:count===2?3:4;
+    cells+='<span class="contribution-cell level-'+level+(date.getTime()===today.getTime()?" is-today":"")+'" title="'+dateKey(date)+": "+(count?count+" workout(s)":"No workout")+'"></span>';
+   }
+   weeks+='<div class="contribution-week">'+cells+'</div>';
+  }
+  $("contributionMonths").innerHTML=months;$("contributionGrid").innerHTML=weeks;
+  $("activitySummary").textContent=active+" workout days in the last 12 months";
  }
- $("contributionMonths").innerHTML=months;
- $("contributionGrid").innerHTML=weeks;
- $("activitySummary").textContent=workoutDays+" workout days in the last 12 months";
 }
 function streak(h){const days=[...new Set(h.map(x=>new Date(x.date).toDateString()))].sort((a,b)=>new Date(b)-new Date(a));let n=0,d=new Date();d.setHours(0,0,0,0);if(days[0]!==d.toDateString())d.setDate(d.getDate()-1);while(days.includes(d.toDateString())){n++;d.setDate(d.getDate()-1)}return n}
 function start(){session={name:workoutTemplate.name,warmupDone:false,exercises:workoutTemplate.exercises.map(e=>({...e,done:Array(e.sets).fill(false),weights:Array(e.sets).fill("")}))};startedAt=Date.now();document.body.classList.add("workout-mode");renderWorkout()}
@@ -48,4 +62,4 @@ $("finishWorkout").onclick=finish;$("cancelWorkout").onclick=()=>{RestTimer.skip
 function updateProgress(){const c=counts();$("sessionCount").textContent=c.done+"/"+c.total;$("progressPercent").textContent=c.percent+"%";$("completionValue").textContent=c.percent+"%";$("progressFill").style.width=c.percent+"%";$("footerProgress").style.width=c.percent+"%"}
 function finish(){const duration=Math.max(0,Math.round((Date.now()-startedAt)/1000));Store.update(d=>d.history.unshift({name:session.name,date:new Date().toISOString(),duration,exercises:session.exercises,warmupDone:session.warmupDone}));RestTimer.skip();session=null;document.body.classList.remove("workout-mode");home();showToast("Workout saved")}
 function home(){$("workoutSummary").innerHTML='<div class="empty-state"><span class="empty-icon">＋</span><h3>No workout</h3><button class="primary-button" id="startSampleButton">Start workout</button></div>';$("startSampleButton").onclick=start;stats();renderCalendar()}
-$("todayDate").textContent=dateLabel();$("startSampleButton").onclick=start;$("themeButton").onclick=()=>showToast("Dark appearance");stats();renderCalendar();if("serviceWorker"in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{})})();
+$("todayDate").textContent=dateLabel();$("startSampleButton").onclick=start;$("themeButton").onclick=()=>showToast("Dark appearance");$("monthViewButton").onclick=()=>{calendarMode="month";renderCalendar()};$("yearViewButton").onclick=()=>{calendarMode="year";renderCalendar()};$("monthPrev").onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()-1,1);renderCalendar()};$("monthNext").onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+1,1);renderCalendar()};stats();renderCalendar();if("serviceWorker"in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{})})();
