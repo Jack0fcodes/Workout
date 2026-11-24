@@ -13,33 +13,29 @@ function stats(){const h=Store.get().history;$("workoutCount").textContent=h.len
 function dateKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function renderCalendar(){
  const today=new Date();today.setHours(0,0,0,0);
- const start=new Date(today);start.setDate(start.getDate()-364);start.setDate(start.getDate()-start.getDay());
- const history=Store.get().history;
+ const first=new Date(today);first.setDate(first.getDate()-364);first.setDate(first.getDate()-first.getDay());
  const counts=new Map();
- history.forEach(item=>{const d=new Date(item.date);const key=dateKey(d);counts.set(key,(counts.get(key)||0)+1)});
- let totalDays=0,weekMarkup="",monthMarkup="",lastMonth=-1,lastYear=-1;
- const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
- for(let week=0;week<53;week++){
-  const weekStart=new Date(start);weekStart.setDate(start.getDate()+week*7);
-  if(weekStart.getMonth()!==lastMonth||week===0){
-   const label=months[weekStart.getMonth()];
-   monthMarkup+='<span style="grid-column:'+(week+1)+'">'+label+'</span>';
-   lastMonth=weekStart.getMonth();lastYear=weekStart.getFullYear();
-  }
-  let days="";
-  for(let dow=0;dow<7;dow++){
-   const d=new Date(weekStart);d.setDate(weekStart.getDate()+dow);
-   const key=dateKey(d),count=counts.get(key)||0,isFuture=d>today;
-   if(count)totalDays++;
-   const level=count===0?0:count===1?2:count===2?3:4;
+ Store.get().history.forEach(item=>{const d=new Date(item.date);const key=dateKey(d);counts.set(key,(counts.get(key)||0)+1)});
+ const monthNames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+ let weeks="",months="",lastMonth=-1,workoutDays=0;
+ for(let w=0;w<53;w++){
+  const monday=new Date(first);monday.setDate(first.getDate()+w*7);
+  if(monday.getMonth()!==lastMonth){months+='<span style="grid-column:'+(w+1)+'">'+monthNames[monday.getMonth()]+'</span>';lastMonth=monday.getMonth()}
+  let cells="";
+  for(let d=0;d<7;d++){
+   const date=new Date(monday);date.setDate(monday.getDate()+d);
+   const count=counts.get(dateKey(date))||0;
+   const future=date>today;
+   if(count&&!future)workoutDays++;
+   const level=future||!count?0:count===1?2:count===2?3:4;
    const label=count?count+" workout"+(count===1?"":"s"):"No workout";
-   days+='<span class="contribution-cell level-'+(isFuture?0:level)+(d.getTime()===today.getTime()?" is-today":"")+'" title="'+key+": "+label+'" aria-label="'+key+": "+label+'"></span>';
+   cells+='<span class="contribution-cell level-'+level+(date.getTime()===today.getTime()?" is-today":"")+'" title="'+dateKey(date)+": "+label+'" aria-label="'+dateKey(date)+": "+label+'"></span>';
   }
-  weekMarkup+='<div class="contribution-week">'+days+'</div>';
+  weeks+='<div class="contribution-week">'+cells+'</div>';
  }
- $("contributionMonths").innerHTML=monthMarkup;
- $("contributionGrid").innerHTML=weekMarkup;
- $("activitySummary").textContent=totalDays+" workout days in the last 12 months";
+ $("contributionMonths").innerHTML=months;
+ $("contributionGrid").innerHTML=weeks;
+ $("activitySummary").textContent=workoutDays+" workout days in the last 12 months";
 }
 function streak(h){const days=[...new Set(h.map(x=>new Date(x.date).toDateString()))].sort((a,b)=>new Date(b)-new Date(a));let n=0,d=new Date();d.setHours(0,0,0,0);if(days[0]!==d.toDateString())d.setDate(d.getDate()-1);while(days.includes(d.toDateString())){n++;d.setDate(d.getDate()-1)}return n}
 function start(){session={name:workoutTemplate.name,warmupDone:false,exercises:workoutTemplate.exercises.map(e=>({...e,done:Array(e.sets).fill(false),weights:Array(e.sets).fill("")}))};startedAt=Date.now();document.body.classList.add("workout-mode");renderWorkout()}
