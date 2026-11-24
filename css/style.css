@@ -295,3 +295,24 @@
 .month-day.level-4{background:linear-gradient(145deg,#d5d8df,#858b96);border-color:rgba(255,255,255,.48);color:#111216}
 .activity-toggle{background:rgba(15,16,19,.58);border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px rgba(255,255,255,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .activity-toggle button.active{background:linear-gradient(145deg,rgba(255,255,255,.23),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px rgba(255,255,255,.22),0 3px 10px rgba(0,0,0,.2)}
+
+/* Compact activity header and true square heatmap cells */
+.contribution-section .section-heading{margin-bottom:10px}
+.contribution-section .section-heading h2{font-size:16px;margin:0}
+.contribution-section .calendar-subtitle{display:none}
+.contribution-months{height:20px;margin-left:30px}
+.contribution-body{grid-template-columns:24px 1fr;gap:6px}
+.contribution-grid{gap:4px}
+.contribution-week{grid-template-rows:repeat(7,1fr);gap:4px;align-items:stretch}
+.contribution-cell{width:100%;height:auto;aspect-ratio:1;border-radius:3px;min-width:0}
+.contribution-weekdays{grid-template-rows:repeat(7,1fr);gap:4px}
+.contribution-weekdays span{height:auto;display:flex;align-items:center}
+.contribution-legend{margin-top:10px}
+.contribution-legend i{width:12px;height:12px;border-radius:3px}
+@media(min-width:900px){
+ .contribution-months{height:22px}
+ .contribution-grid{gap:5px}
+ .contribution-week{gap:5px}
+ .contribution-weekdays{gap:5px}
+ .contribution-cell{border-radius:3px}
+}
