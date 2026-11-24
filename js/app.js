@@ -38,7 +38,10 @@ function renderCalendar(){
   let weeks="",months="",lastMonth=-1,active=0;
   for(let w=0;w<53;w++){
    const monday=new Date(first);monday.setDate(first.getDate()+w*7);
-   if(monday.getMonth()!==lastMonth){months+='<span style="grid-column:'+(w+1)+'">'+names[monday.getMonth()]+'</span>';lastMonth=monday.getMonth()}
+   if(monday.getMonth()!==lastMonth){
+    if(w!==0)months+='<span style="grid-column:'+(w+1)+'">'+names[monday.getMonth()]+'</span>';
+    lastMonth=monday.getMonth();
+   }
    let cells="";for(let d=0;d<7;d++){
     const date=new Date(monday);date.setDate(monday.getDate()+d);const count=counts.get(dateKey(date))||0,future=date>today;
     if(count&&!future)active++;
