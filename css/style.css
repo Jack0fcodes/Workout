@@ -94,3 +94,67 @@
     padding: 24px;
   }
 }
+
+/* Focused workout screen */
+.workout-mode .app-shell{max-width:820px;padding-bottom:42px}
+.workout-mode .topbar{display:none}
+.workout-mode .main-content{display:block;padding-top:18px}
+.workout-mode .welcome,.workout-mode .quick-stats,.workout-mode .recent-section{display:none}
+.workout-mode .panel{padding:0;background:transparent;border:0;box-shadow:none;border-radius:0}
+.workout-mode .panel>.section-heading{display:none}
+.session-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:2px 0 16px}
+.session-header h2{font-size:23px;font-weight:700;letter-spacing:-.6px}
+.session-header p{margin:5px 0 0;color:#8f8f95;font-size:12px}
+.session-count{font-size:11px;color:#b7b7bc;background:#222;border:1px solid #303030;border-radius:20px;padding:6px 10px;white-space:nowrap}
+.progress-track{height:7px;background:#1d1d1f;border-radius:20px;overflow:hidden}
+.progress-track span{display:block;height:100%;width:0;background:#e5e5e7;border-radius:20px;transition:width .2s}
+.progress-caption{display:flex;justify-content:space-between;color:#8d8d92;font-size:11px;margin-top:10px}
+.warmup-row{padding:24px 0 22px;border-bottom:1px solid #202023}
+.warmup-row h3{font-size:15px;margin:0 0 14px}
+.warmup-check{display:flex;align-items:center;gap:10px;font-size:14px;color:#e4e4e7;line-height:1.4}
+.warmup-check input{appearance:none;width:18px;height:18px;border:1px solid #55565b;border-radius:50%;background:transparent;flex:0 0 18px}
+.warmup-check input:checked{background:#e8e8e9;border-color:#e8e8e9;box-shadow:inset 0 0 0 4px #171719}
+.exercise-row{padding:20px 0 18px;border-bottom:1px solid #202023}
+.exercise-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.exercise-heading h3{font-size:15px;font-weight:650;margin:0;line-height:1.35}
+.rest-pill{font-size:10px;letter-spacing:.2px;color:#d1d1d4;background:#242426;border-radius:20px;padding:4px 8px;white-space:nowrap}
+.exercise-detail{font-size:12px;color:#8f8f94;margin:8px 0 10px}
+.set-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.set-tile{min-height:49px;border:1px solid transparent;border-radius:11px;background:#242426;color:#f1f1f2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit;font-size:11px;cursor:pointer;transition:background .15s,border-color .15s}
+.set-dot{width:13px;height:13px;border-radius:50%;background:#aaaeb2;color:#151515;display:grid;place-items:center;font-size:9px;font-weight:900}
+.set-tile.is-done{background:#34363a;border-color:#666a70}
+.set-tile.is-done .set-dot{background:#f2f2f3}
+.rest-panel{margin:18px 0;padding:14px 16px;background:#19191b;border:1px solid #303034;border-radius:13px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.rest-panel[hidden]{display:none}
+.rest-panel>div:first-child{display:flex;flex-direction:column;gap:4px}
+.rest-panel-label{font-size:9px;letter-spacing:1.2px;color:#8c8c92}
+.rest-panel strong{font-size:27px;font-variant-numeric:tabular-nums}
+.timer-actions{display:flex;gap:7px}
+.timer-actions button{margin:0;padding:8px 12px;font-size:11px}
+.workout-footer{padding:20px 0 12px}
+.completion-line{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}
+.completion-value{font-size:18px;color:#35c46a}
+.footer-track{height:5px;background:#19191b}
+.footer-track span{background:#35c46a}
+.workout-footer .action-row{margin-top:15px}
+.workout-footer .primary-button,.workout-footer .secondary-button{margin:0}
+.workout-footer .primary-button{flex:1}
+.workout-footer .secondary-button{min-width:88px}
+.workout-mode .bottom-nav{display:none}
+.workout-mode .toast{bottom:22px}
+@media(min-width:700px){
+ .workout-mode .app-shell{width:min(100% - 64px,760px);max-width:760px;padding-bottom:34px}
+ .workout-mode .main-content{padding-top:24px}
+ .exercise-row{padding:22px 0 20px}
+ .set-tile{min-height:54px}
+}
+@media(min-width:900px){
+ .workout-mode .app-shell{width:min(100% - 120px,760px);max-width:760px}
+ .workout-mode .main-content{padding-top:22px}
+}
+@media(max-width:420px){
+ .exercise-heading h3{font-size:13px}
+ .rest-pill{font-size:9px;padding:4px 6px}
+ .set-grid{gap:5px}
+ .set-tile{min-height:46px}
+}
