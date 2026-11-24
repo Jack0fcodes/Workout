@@ -33,20 +33,28 @@ function renderCalendar(){
   $("monthGrid").innerHTML=cells;
   $("activitySummary").textContent=active+" workout days this month";
  }else{
-  const first=new Date(today);first.setDate(first.getDate()-364);first.setDate(first.getDate()-first.getDay());
+  const year=today.getFullYear();
+  const first=new Date(year,0,1);first.setDate(first.getDate()-first.getDay());
+  const last=new Date(year,11,31);
   const names=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const weekCount=Math.ceil((Math.ceil((last-first)/86400000)+1)/7);
   let weeks="",months="",lastMonth=-1,active=0;
-  for(let w=0;w<53;w++){
-   const monday=new Date(first);monday.setDate(first.getDate()+w*7);
-   if(monday.getMonth()!==lastMonth){
-    if(w!==0)months+='<span style="grid-column:'+(w+1)+'">'+names[monday.getMonth()]+'</span>';
-    lastMonth=monday.getMonth();
+  for(let w=0;w<weekCount;w++){
+   const sunday=new Date(first);sunday.setDate(first.getDate()+w*7);
+   if(sunday.getMonth()!==lastMonth){
+    months+='<span style="grid-column:'+(w+1)+'">'+names[sunday.getMonth()]+'</span>';
+    lastMonth=sunday.getMonth();
    }
-   let cells="";for(let d=0;d<7;d++){
-    const date=new Date(monday);date.setDate(monday.getDate()+d);const count=counts.get(dateKey(date))||0,future=date>today;
+   let cells="";
+   for(let d=0;d<7;d++){
+    const date=new Date(sunday);date.setDate(sunday.getDate()+d);date.setHours(0,0,0,0);
+    const inYear=date.getFullYear()===year;
+    if(!inYear){cells+='<span class="contribution-cell is-blank" aria-hidden="true"></span>';continue}
+    const count=counts.get(dateKey(date))||0,future=date>today;
     if(count&&!future)active++;
     const level=future||!count?0:count===1?2:count===2?3:4;
-    cells+='<span class="contribution-cell level-'+level+(date.getTime()===today.getTime()?" is-today":"")+'" title="'+dateKey(date)+": "+(count?count+" workout(s)":"No workout")+'"></span>';
+    const current=date.getTime()===today.getTime();
+    cells+='<span class="contribution-cell level-'+level+(current?" is-today":"")+'" title="'+dateKey(date)+": "+(count?count+" workout(s)":"No workout")+'" aria-label="'+dateKey(date)+": "+(count?count+" workout(s)":"No workout")+'"></span>';
    }
    weeks+='<div class="contribution-week">'+cells+'</div>';
   }
