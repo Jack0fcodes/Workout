@@ -1,1 +1,14 @@
-const CACHE="workout-v7";const FILES=["./","./index.html","./manifest.webmanifest","./icon.svg","./css/style.css","./js/storage.js","./js/routines.js","./js/timer.js","./js/journal.js","./js/app.js"];self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));self.addEventListener("fetch",e=>{if(e.request.method==="GET")e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const copy=res.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return res}).catch(()=>caches.match("./index.html"))))});
+const CACHE="workout-v8";
+const FILES=["./","./index.html","./manifest.webmanifest","./icon.svg","./css/style.css?v=8","./js/storage.js?v=8","./js/routines.js?v=8","./js/timer.js?v=8","./js/journal.js?v=8","./js/app.js?v=8"];
+self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)))});
+self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener("fetch",event=>{
+ if(event.request.method!=="GET")return;
+ const url=new URL(event.request.url);
+ const isAppAsset=url.pathname.endsWith(".html")||url.pathname.endsWith(".js")||url.pathname.endsWith(".css");
+ if(isAppAsset){
+  event.respondWith(fetch(event.request).then(response=>{const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));return response}).catch(()=>caches.match(event.request).then(cached=>cached||caches.match("./index.html"))));
+ }else{
+  event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(response=>{const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));return response})));
+ }
+});
