@@ -316,3 +316,21 @@
  .contribution-weekdays{gap:5px}
  .contribution-cell{border-radius:3px}
 }
+
+/* Fix contribution grid alignment: fixed square tiles and stable weekday rows */
+.contribution-chart{min-width:720px}
+.contribution-months{margin-left:32px;height:22px;column-gap:0;font-size:10px}
+.contribution-body{grid-template-columns:26px minmax(0,1fr);gap:6px}
+.contribution-grid{grid-template-columns:repeat(53,minmax(10px,1fr));gap:4px;align-items:start}
+.contribution-week{grid-template-columns:1fr;grid-template-rows:repeat(7,10px);gap:4px;align-content:start;justify-items:center}
+.contribution-cell{width:10px!important;height:10px!important;min-width:10px;min-height:10px;aspect-ratio:1;box-sizing:border-box;flex:none}
+.contribution-weekdays{grid-template-rows:repeat(7,10px);row-gap:4px;align-content:start}
+.contribution-weekdays span{height:10px;line-height:10px}
+.contribution-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+@media(min-width:900px){
+ .contribution-chart{min-width:720px}
+ .contribution-grid{gap:5px}
+ .contribution-week{grid-template-rows:repeat(7,10px);gap:5px}
+ .contribution-cell{width:10px!important;height:10px!important}
+ .contribution-weekdays{grid-template-rows:repeat(7,10px);row-gap:5px}
+}
