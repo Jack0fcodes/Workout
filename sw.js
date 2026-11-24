@@ -1,5 +1,5 @@
-const CACHE="workout-v14";
-const FILES=["./","./index.html","./manifest.webmanifest","./icon.svg","./css/style.css?v=14","./js/storage.js?v=14","./js/routines.js?v=14","./js/timer.js?v=14","./js/journal.js?v=14","./js/app.js?v=14"];
+const CACHE="workout-v15";
+const FILES=["./","./index.html","./manifest.webmanifest","./icon.svg","./css/style.css?v=15","./js/storage.js?v=15","./js/routines.js?v=15","./js/timer.js?v=15","./js/journal.js?v=15","./js/app.js?v=15"];
 self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)))});
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener("fetch",event=>{
