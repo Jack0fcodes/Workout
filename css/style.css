@@ -334,3 +334,11 @@
  .contribution-cell{width:10px!important;height:10px!important}
  .contribution-weekdays{grid-template-rows:repeat(7,10px);row-gap:5px}
 }
+
+/* Calendar-year grid: no weekday labels, first column starts in January */
+.contribution-body{display:block}
+.contribution-grid{grid-template-columns:repeat(53,minmax(10px,1fr))}
+.contribution-week{grid-template-rows:repeat(7,10px);grid-template-columns:1fr;justify-items:center}
+.contribution-cell.is-blank{visibility:hidden;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+.contribution-cell.is-today{outline:2px solid #f1f2f4!important;outline-offset:1px;box-shadow:0 0 0 2px rgba(255,255,255,.15),0 0 10px rgba(255,255,255,.28)!important}
+.contribution-months{margin-left:0}
