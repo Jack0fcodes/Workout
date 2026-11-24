@@ -1,4 +1,4 @@
-const CACHE="workout-v9";
+const CACHE="workout-v10";
 const FILES=["./","./index.html","./manifest.webmanifest","./icon.svg","./css/style.css?v=8","./js/storage.js?v=8","./js/routines.js?v=8","./js/timer.js?v=8","./js/journal.js?v=8","./js/app.js?v=8"];
 self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)))});
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
