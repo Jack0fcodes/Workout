@@ -73,11 +73,11 @@ function showFormVideo(index,id){const target=$("workoutSummary").querySelector(
 function bindFormVideos(){
  const saved=Store.get().formVideos||{};
  const defaults={
-  "Dumbbell Shoulder Press":"https://www.youtube.com/watch?v=aWYcZTk3iG8",
-  "Dumbbell Lateral Raise":"https://www.youtube.com/watch?v=TM6se0vr1VA",
-  "Dumbbell Bicep Curl":"https://www.youtube.com/watch?v=e_XV8NV7xm0",
-  "Hammer Curl":"https://www.youtube.com/watch?v=zaKAVsm9aMI",
-  "Overhead Triceps Extension":"https://www.youtube.com/watch?v=dGQWHaOcKCQ"
+  "Dumbbell Shoulder Press":"https://www.youtube.com/watch?v=qEwKCR5JCog",
+  "Dumbbell Lateral Raise":"https://www.youtube.com/watch?v=PzsMitRdI_8",
+  "Dumbbell Bicep Curl":"https://www.youtube.com/watch?v=ykJmrZ5v0Oo",
+  "Hammer Curl":"https://www.youtube.com/watch?v=TwD-YGVP4Bk",
+  "Overhead Triceps Extension":"https://www.youtube.com/watch?v=T1EO7u2n7WU"
  };
  session.exercises.forEach((exercise,index)=>{
   const input=$("workoutSummary").querySelector('[data-video-url="'+index+'"]');
