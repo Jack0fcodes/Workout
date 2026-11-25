@@ -1,0 +1,81 @@
+/* Activity card: match the same charcoal surface used by Workout, stats and Recent */
+.contribution-section,
+.calendar-section.contribution-section {
+  background: #1b1c20;
+  border: 1px solid #303238;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px #0002;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 18px;
+}
+
+/* Keep the activity title and spacing consistent with the other dashboard cards */
+.contribution-section .section-heading {
+  align-items: center;
+  margin-bottom: 14px;
+}
+.contribution-section .section-heading h2 {
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -.35px;
+}
+.contribution-section .calendar-subtitle {
+  display: none;
+}
+
+/* Glass remains a subtle accent on the view switch, not the whole card */
+.contribution-section .activity-toggle {
+  background: #151619;
+  border: 1px solid #303238;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.contribution-section .activity-toggle button {
+  border-radius: 8px;
+}
+.contribution-section .activity-toggle button.active {
+  background: linear-gradient(145deg,#ffffff24,#ffffff0b);
+  border: 1px solid #ffffff25;
+  box-shadow: inset 0 1px #ffffff25, 0 3px 10px #0003;
+}
+
+/* Retain the compact square heatmap and monochrome glass levels */
+.contribution-section .contribution-scroll {
+  padding: 2px 0 4px;
+}
+.contribution-section .contribution-cell.level-0 {
+  background: #17181b;
+  border-color: #27282d;
+}
+.contribution-section .contribution-cell.level-1 {
+  background: linear-gradient(145deg,#25272b,#1e2024);
+  border-color: #33353a;
+  box-shadow: inset 0 1px #ffffff08;
+}
+.contribution-section .contribution-cell.level-2 {
+  background: linear-gradient(145deg,#3a3d43,#292b30);
+  border-color: #484b52;
+  box-shadow: inset 0 1px #ffffff12;
+}
+.contribution-section .contribution-cell.level-3 {
+  background: linear-gradient(145deg,#70757e,#454950);
+  border-color: #858a93;
+  box-shadow: inset 0 1px #ffffff22;
+}
+.contribution-section .contribution-cell.level-4 {
+  background: linear-gradient(145deg,#d5d8df,#858b96);
+  border-color: #d7dae0;
+  box-shadow: inset 0 1px #ffffff55,0 0 8px #dce1eb12;
+}
+.contribution-section .contribution-legend .level-0 {background:#17181b;border-color:#27282d}
+.contribution-section .contribution-legend .level-1 {background:linear-gradient(145deg,#25272b,#1e2024)}
+.contribution-section .contribution-legend .level-2 {background:linear-gradient(145deg,#3a3d43,#292b30)}
+.contribution-section .contribution-legend .level-3 {background:linear-gradient(145deg,#70757e,#454950)}
+.contribution-section .contribution-legend .level-4 {background:linear-gradient(145deg,#d5d8df,#858b96)}
+@media (min-width:900px) {
+  .contribution-section,
+  .calendar-section.contribution-section {padding:20px}
+  .contribution-section .section-heading {margin-bottom:12px}
+}
