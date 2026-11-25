@@ -367,3 +367,11 @@
 .form-video-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#080808}
 .form-video-player a{display:inline-block;margin-top:8px;color:#b9b9bf;font-size:11px;text-decoration:underline}
 @media(max-width:480px){.form-video-tools{gap:6px}.form-video-tools input{flex-basis:100%}}
+
+/* Direct YouTube link icon in the exercise form header */
+.form-video summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none}
+.form-video summary::-webkit-details-marker{display:none}
+.youtube-direct{width:32px;height:30px;flex:0 0 32px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.035));color:#d9dbe0;box-shadow:inset 0 1px rgba(255,255,255,.12);transition:background .15s,transform .15s}
+.youtube-direct svg{width:16px;height:16px;fill:currentColor}
+.youtube-direct:hover{background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.08))}
+.youtube-direct:active{transform:scale(.96)}
