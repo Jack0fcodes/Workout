@@ -354,3 +354,16 @@
 .delete-activity,.clear-activities{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.045);color:var(--muted);padding:7px 11px;font-size:13px;cursor:pointer}
 .delete-activity{font-size:20px;line-height:1;min-width:32px;min-height:32px;display:grid;place-items:center}
 .delete-activity:active,.clear-activities:active{background:rgba(255,255,255,.12);color:var(--text)}
+
+/* Inline YouTube exercise form guides */
+.form-video{margin-top:14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:rgba(255,255,255,.025);overflow:hidden}
+.form-video summary{padding:11px 13px;color:#c9c9cd;font-size:12px;cursor:pointer;list-style-position:inside}
+.form-video[open] summary{border-bottom:1px solid rgba(255,255,255,.07)}
+.form-video-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px}
+.form-video-tools input{flex:1 1 220px;min-width:0;height:38px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(0,0,0,.28);color:var(--text);padding:0 11px;font:inherit;font-size:12px;outline:none}
+.form-video-tools input:focus{border-color:rgba(255,255,255,.32)}
+.form-video-tools .secondary-button{min-height:36px;padding:0 11px;font-size:11px}
+.form-video-player{padding:0 12px 12px}
+.form-video-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#080808}
+.form-video-player a{display:inline-block;margin-top:8px;color:#b9b9bf;font-size:11px;text-decoration:underline}
+@media(max-width:480px){.form-video-tools{gap:6px}.form-video-tools input{flex-basis:100%}}
