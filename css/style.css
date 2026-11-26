@@ -375,3 +375,7 @@
 .youtube-direct svg{width:16px;height:16px;fill:currentColor}
 .youtube-direct:hover{background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.08))}
 .youtube-direct:active{transform:scale(.96)}
+
+/* Compact glass timer controls */
+.timer-icon-button{width:44px;height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:14px;cursor:pointer}
+.timer-control-icon{width:19px;height:19px;display:block;fill:currentColor}
