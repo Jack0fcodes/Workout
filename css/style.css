@@ -394,3 +394,13 @@
 #removeRestAlarmFile{margin:0;cursor:pointer}
 .workout-mode .sound-settings{display:none!important}
 @media(max-width:420px){.sound-controls{align-items:stretch}.preview-sound{padding:10px;font-size:12px}}
+
+/* Clear, tappable alarm sound choices */
+.sound-choice-list{display:grid;grid-template-columns:1fr;gap:7px;margin:0 0 12px}
+.sound-choice{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:42px;padding:10px 13px;border:1px solid #34363c;border-radius:12px;background:rgba(255,255,255,.025);color:var(--text);text-align:left;font:inherit;font-size:13px;cursor:pointer;transition:background .16s,border-color .16s}
+.sound-choice.selected{border-color:#777a82;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.045));box-shadow:inset 0 1px rgba(255,255,255,.07)}
+.sound-choice-check{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1px solid #555860;color:#f3f4f6;flex:0 0 22px}
+.sound-choice.selected .sound-choice-check{border-color:#aeb1b8;background:linear-gradient(145deg,#555960,#292b30)}
+.preview-sound{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:0 0 12px}
+.settings-trigger svg{display:block}
+.sound-settings .section-heading .secondary-button{display:grid;place-items:center;width:36px;height:36px;padding:0;font-size:20px}
