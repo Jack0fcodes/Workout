@@ -72,16 +72,10 @@ function youtubeVideoId(value){try{const u=new URL(value);const host=u.hostname.
 function showFormVideo(index,id){const target=$("workoutSummary").querySelector('[data-video-player="'+index+'"]');if(!target)return;target.innerHTML="";if(!id)return;const frame=document.createElement("iframe");frame.src="https://www.youtube-nocookie.com/embed/"+id+"?rel=0";frame.title="Exercise form demonstration";frame.loading="lazy";frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.referrerPolicy="strict-origin-when-cross-origin";target.appendChild(frame);const link=document.createElement("a");link.href="https://www.youtube.com/watch?v="+id;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open on YouTube";target.appendChild(link)}
 function bindFormVideos(){
  const saved=Store.get().formVideos||{};
- const defaults={
-  "Dumbbell Shoulder Press":"https://www.youtube.com/watch?v=qEwKCR5JCog",
-  "Dumbbell Lateral Raise":"https://www.youtube.com/watch?v=PzsMitRdI_8",
-  "Dumbbell Bicep Curl":"https://www.youtube.com/watch?v=ykJmrZ5v0Oo",
-  "Hammer Curl":"https://www.youtube.com/watch?v=TwD-YGVP4Bk",
-  "Overhead Triceps Extension":"https://www.youtube.com/watch?v=T1EO7u2n7WU"
- };
+ const defaults={};
  session.exercises.forEach((exercise,index)=>{
   const input=$("workoutSummary").querySelector('[data-video-url="'+index+'"]');
-  const url=saved[exercise.name]||defaults[exercise.name]||"";
+  const url=saved[exercise.name]||"";
   const id=youtubeVideoId(url);
   const direct=$("workoutSummary").querySelector('[data-youtube-direct="'+index+'"]');
   if(input)input.value=saved[exercise.name]||"";
