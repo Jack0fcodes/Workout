@@ -102,13 +102,13 @@
 .workout-mode .welcome,.workout-mode .quick-stats,.workout-mode .recent-section{display:none}
 .workout-mode .panel{padding:0;background:transparent;border:0;box-shadow:none;border-radius:0}
 .workout-mode .panel>.section-heading{display:none}
-.session-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:2px 0 16px}
+.session-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:2px 0 14px}
 .session-header h2{font-size:23px;font-weight:700;letter-spacing:-.6px}
-.session-header p{margin:5px 0 0;color:#8f8f95;font-size:12px}
+.session-title-group{display:flex;align-items:center;min-height:30px}
 .session-count{font-size:11px;color:#b7b7bc;background:#222;border:1px solid #303030;border-radius:20px;padding:6px 10px;white-space:nowrap}
-.progress-track{height:7px;background:#1d1d1f;border-radius:20px;overflow:hidden}
+.progress-track{height:5px;background:#1d1d1f;border-radius:20px;overflow:hidden}
 .progress-track span{display:block;height:100%;width:0;background:#e5e5e7;border-radius:20px;transition:width .2s}
-.progress-caption{display:flex;justify-content:space-between;color:#8d8d92;font-size:11px;margin-top:10px}
+.progress-caption{display:flex;justify-content:space-between;color:#8d8d92;font-size:11px;margin-top:8px}
 .warmup-row{padding:24px 0 22px;border-bottom:1px solid #202023}
 .warmup-row h3{font-size:15px;margin:0 0 14px}
 .warmup-check{display:flex;align-items:center;gap:10px;font-size:14px;color:#e4e4e7;line-height:1.4}
