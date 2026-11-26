@@ -106,7 +106,7 @@
 .session-header h2{font-size:23px;font-weight:700;letter-spacing:-.6px}
 .session-title-group{display:flex;align-items:center;min-height:30px}
 .session-count{font-size:11px;color:#b7b7bc;background:#222;border:1px solid #303030;border-radius:20px;padding:6px 10px;white-space:nowrap}
-.progress-track{height:5px;background:#1d1d1f;border-radius:20px;overflow:hidden}
+.progress-track{height:7px;background:#1d1d1f;border-radius:20px;overflow:hidden}
 .progress-track span{display:block;height:100%;width:0;background:#e5e5e7;border-radius:20px;transition:width .2s}
 .progress-caption{display:flex;justify-content:space-between;color:#8d8d92;font-size:11px;margin-top:8px}
 .warmup-row{padding:24px 0 22px;border-bottom:1px solid #202023}
@@ -134,7 +134,7 @@
 .workout-footer{padding:20px 0 12px}
 .completion-line{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}
 .completion-value{font-size:18px;color:#35c46a}
-.footer-track{height:5px;background:#19191b}
+.footer-track{height:7px;background:#19191b}
 .footer-track span{background:#35c46a}
 .workout-footer .action-row{margin-top:15px}
 .workout-footer .primary-button,.workout-footer .secondary-button{margin:0}
