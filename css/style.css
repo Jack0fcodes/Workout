@@ -404,3 +404,8 @@
 .preview-sound{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:0 0 12px}
 .settings-trigger svg{display:block}
 .sound-settings .section-heading .secondary-button{display:grid;place-items:center;width:36px;height:36px;padding:0;font-size:20px}
+
+/* Alarm preferences: floating glass sheet, never share the dashboard grid row */
+body:has(#soundSettings:not([hidden]))::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:19}
+.sound-settings:not([hidden]){position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 72px);left:50%;transform:translateX(-50%);width:min(560px,calc(100vw - 28px));max-height:calc(100dvh - env(safe-area-inset-top,0px) - 100px);overflow-y:auto;overscroll-behavior:contain;margin:0;padding:20px;background:rgba(27,28,32,.98);border:1px solid #45474e;border-radius:20px;box-shadow:0 24px 70px #000b,inset 0 1px rgba(255,255,255,.07);backdrop-filter:blur(28px) saturate(125%);-webkit-backdrop-filter:blur(28px) saturate(125%)}
+@media(max-width:420px){.sound-settings:not([hidden]){top:calc(env(safe-area-inset-top,0px) + 58px);max-height:calc(100dvh - env(safe-area-inset-top,0px) - 78px);padding:16px}}
