@@ -55,14 +55,14 @@
   box-shadow: inset 0 1px #ffffff08;
 }
 .contribution-section .contribution-cell.level-2 {
-  background: linear-gradient(145deg,#3a3d43,#292b30);
-  border-color: #484b52;
-  box-shadow: inset 0 1px #ffffff12;
+  background: linear-gradient(145deg,#5a5e66,#3d4047);
+  border-color: #6a6e77;
+  box-shadow: inset 0 1px #ffffff24;
 }
 .contribution-section .contribution-cell.level-3 {
-  background: linear-gradient(145deg,#70757e,#454950);
-  border-color: #858a93;
-  box-shadow: inset 0 1px #ffffff22;
+  background: linear-gradient(145deg,#9297a1,#626771);
+  border-color: #a4a9b2;
+  box-shadow: inset 0 1px #ffffff35;
 }
 .contribution-section .contribution-cell.level-4 {
   background: linear-gradient(145deg,#d5d8df,#858b96);
